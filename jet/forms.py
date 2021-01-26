@@ -146,6 +146,10 @@ class ModelLookupForm(forms.Form):
             lambda instance: {'id': instance.pk, 'text': get_model_instance_label(instance)},
             qs.all()[offset:offset + limit]
         ))
+
+        if page == 1:
+            items.insert(0, {'id': '', 'text': '---------'})
+
         total = qs.count()
 
         return items, total
